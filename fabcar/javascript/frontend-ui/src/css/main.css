@@ -1,0 +1,20 @@
+body {
+    font-family: Montserrat, "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.react_nav {
+    background-color: #3C3434;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.concess {
+    font-size: 1.5em;
+    text-align: center;
+    margin-left: -20%;
+}
+
+table {
+    margin: auto;
+    width: 50% !important;
+}
