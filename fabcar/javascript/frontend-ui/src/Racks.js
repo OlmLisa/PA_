@@ -8,19 +8,22 @@ export default class Racks extends React.Component {
     constructor() {
         super();
         this.state = {
-            cars: [],
+            rep: 0,
+            vente: 0,
+            ca: 0,
+
             track1:[
                 ['Euros', 'Coûts des réparations', 'Chiffres de vente','Chiffre d\'affaire'],
-                ['Bilan 2021', 2000, 5000, 3000]
+                ['Bilan 2021', 0, 0, 0]
               ]
         }
     }
     componentDidMount() {
         this.props.setLoading(true);
-        axios.get('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/cars').then(res => {
+        axios.get('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/allcoutreparation').then(res => {
             this.props.setLoading(false);
             if(res.data.status) {
-                this.setState({cars: res.data.cars})
+                this.setState({rep: res.data.rep})
             } else {
                 alert(res.data.error.message)
             }
@@ -28,6 +31,35 @@ export default class Racks extends React.Component {
             this.props.setLoading(false);
             alert('Something went wrong')
         })
+
+        axios.get('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/allcoutvente').then(res => {
+            this.props.setLoading(false);
+            if(res.data.status) {
+                this.setState({vente: res.data.vente})
+            } else {
+                alert(res.data.error.message)
+            }
+        }).catch(err => {
+            this.props.setLoading(false);
+            alert('Something went wrong')
+        })
+
+        axios.get('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/getca').then(res => {
+            this.props.setLoading(false);
+            if(res.data.status) {
+                this.setState({ca: res.data.ca})
+            } else {
+                alert(res.data.error.message)
+            }
+        }).catch(err => {
+            this.props.setLoading(false);
+            alert('Something went wrong')
+        })
+
+        this.setState({track1:[
+            ['Euros', 'Coûts des réparations', 'Chiffres de vente','Chiffre d\'affaire'],
+            ['Bilan 2021', this.state.rep, this.state.vente, this.state.ca]
+          ]})
     }
 
     render() {
