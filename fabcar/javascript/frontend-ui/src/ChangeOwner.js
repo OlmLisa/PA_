@@ -50,12 +50,11 @@ export default class ChangeOwner extends React.Component {
     onFormReparationSubmit(e) {
         e.preventDefault();
         this.props.setLoading(true);
-        alert(this.state.coutreparation)
         axios.put('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/cars/reparation', {
             key: this.state.key,
             departarrivee: this.state.departarrivee,
             reparation:this.state.reparation,
-            coutreparation: this.state.coutreparation
+            coutrep: this.state.coutreparation
         }).then(res => {
             this.props.setLoading(false);
             if (res.data.status) {
