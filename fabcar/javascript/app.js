@@ -206,8 +206,8 @@ app.put('/cars/reparation', async (req, res) => {
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('fabcar');
 
-
         await contract.submitTransaction('addCarReparation', req.body.key, req.body.reparation);
+        await contract.submitTransaction('addCarCoutReparation', req.body.key, req.body.coutreparation);
         await contract.submitTransaction('addCarDepartArrivee', req.body.key, req.body.departarrivee);
         res.json({status: true, message: 'Transaction has been submitted.'});
 
@@ -215,6 +215,7 @@ app.put('/cars/reparation', async (req, res) => {
         res.json({status: false, error: err});
     }
 });
+
 
 app.listen(3000, () => {
     console.log('REST Server listening on port 3000');
