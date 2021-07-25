@@ -13,7 +13,8 @@ export default class ChangeOwner extends React.Component {
             panne:'',
             arrivee:'',
             departarrivee:'',
-            coutreparation:'',
+            reparation: '',
+            coutreparation: '',
             redirect: false,
             car: {}
         }
@@ -49,7 +50,7 @@ export default class ChangeOwner extends React.Component {
     onFormReparationSubmit(e) {
         e.preventDefault();
         this.props.setLoading(true);
-        
+        alert(this.state.coutreparation)
         axios.put('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/cars/reparation', {
             key: this.state.key,
             departarrivee: this.state.departarrivee,
