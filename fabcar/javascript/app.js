@@ -207,7 +207,7 @@ app.put('/cars/reparation', async (req, res) => {
         const contract = network.getContract('fabcar');
 
         await contract.submitTransaction('addCarReparation', req.body.key, req.body.reparation);
-        await contract.submitTransaction('addCarCoutReparation', req.body.key, req.body.coutreparation);
+        await contract.submitTransaction('addCarCoutReparation', req.body.key, req.body.coutrep);
         await contract.submitTransaction('addCarDepartArrivee', req.body.key, req.body.departarrivee);
         res.json({status: true, message: 'Transaction has been submitted.'});
 
