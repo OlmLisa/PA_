@@ -13,6 +13,7 @@ export default class ChangeOwner extends React.Component {
             panne:'',
             arrivee:'',
             departarrivee:'',
+            coutreparation:'',
             redirect: false,
             car: {}
         }
@@ -21,6 +22,7 @@ export default class ChangeOwner extends React.Component {
     onOwnerChanged(e) { this.setState({ owner: e.target.value }) }
     onDatedChanged(e) { this.setState({ departarrivee: e.target.value }) }
     onPanneChanged(e) { this.setState({ panne: e.target.value }) }
+    onCoutReparationChanged(e) { this.setState({ coutreparation: e.target.value })}
     onDateaChanged(e) { this.setState({ departarrivee: e.target.value }) }
     onArriveeChanged(e) { this.setState({ departarrivee: e.target.value }) }
     onReparationChanged(e) { this.setState({ reparation: e.target.value }) }
@@ -47,10 +49,12 @@ export default class ChangeOwner extends React.Component {
     onFormReparationSubmit(e) {
         e.preventDefault();
         this.props.setLoading(true);
+        
         axios.put('http://'+  process.env.REACT_APP_API_HOST  +':'+ process.env.REACT_APP_API_PORT+'/cars/reparation', {
             key: this.state.key,
             departarrivee: this.state.departarrivee,
-            reparation:this.state.reparation
+            reparation:this.state.reparation,
+            coutreparation: this.state.coutreparation
         }).then(res => {
             this.props.setLoading(false);
             if (res.data.status) {
@@ -183,6 +187,10 @@ export default class ChangeOwner extends React.Component {
                             <div className="input-field col s12">
                                 <input id="reparation" type="text" className="validate" required value={this.state.reparation} onChange={this.onReparationChanged.bind(this)} />
                                 <label htmlFor="reparation">Réparation</label>
+                            </div>
+                            <div className="input-field col s12">
+                                <input id="coutreparation" type="text" className="validate" required value={this.state.coutreparation} onChange={this.onCoutReparationChanged.bind(this)} />
+                                <label htmlFor="coutreparation">Coût de réparation</label>
                             </div>
                             <div className="input-field col s12">
                                 <input id="departarrivee" type="text" className="validate" required value={this.state.departarrivee} onChange={this.onDateaChanged.bind(this)} />
